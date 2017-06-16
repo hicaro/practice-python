@@ -55,9 +55,19 @@ def testRemoveLeaves():
     _tree.remove(1)
     _tree.remove(17)
 
-    print _tree.level_order()
     assert _tree.get_min() == 3
     assert _tree.get_max() == 15
+
+def testIsBinarySearchTree():
+    _tree = __creat_tree()
+
+    assert _tree.is_binary_search_tree_in_order()
+
+def testIsNotBinarySearchTree():
+    _tree = __creat_tree()
+    _tree.root.value = 2
+
+    assert not _tree.is_binary_search_tree_in_order()
 
 def __creat_tree():
     _tree = BST()

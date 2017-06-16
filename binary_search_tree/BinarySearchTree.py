@@ -5,6 +5,8 @@ try:
 except ImportError:
     import queue as Q
 
+import sys
+
 class BST(object):
     """ BST is a binary search tree implementation """
 
@@ -276,3 +278,37 @@ class BST(object):
             return _parent.value
 
         return None
+
+    def is_binary_search_tree(self, root=None):
+        """ checks whether the tree is a binary search tree """
+        if root is None:
+            root = self.root
+
+        _min = - sys.maxint - 1
+        _max = sys.maxint
+
+        return self.__is_binary_search_tree(root, _min, _max)
+
+    def __is_binary_search_tree(self, root, min_value, max_value):
+        """ recursively checks whether the tree is a binary search tree """
+        if root is None:
+            return True
+
+        return root.value > min_value and root.value < max_value  \
+            and self.__is_binary_search_tree(root.left, min_value, root.value) \
+            and self.__is_binary_search_tree(root.right, root.value, max_value)
+
+    def is_binary_search_tree_in_order(self):
+        """ checks whether the tree is a binary search tree """
+        # get elements in order
+        _ordered = self.in_order()
+        _return = True
+        _last = _ordered[0]
+        # check if the array is ordered
+        for value in _ordered[1:]:
+            _return = _return and value > _last
+            _last = value
+            if not _return:
+                break
+
+        return _return
