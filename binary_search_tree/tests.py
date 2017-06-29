@@ -23,17 +23,17 @@ def testManyInsert():
     assert _tree.exists(35)
 
 def testGetMin():
-    _tree = __creat_tree()
+    _tree = __create_tree()
 
     assert _tree.get_min() == 1
 
 def testGetMax():
-    _tree = __creat_tree()
+    _tree = __create_tree()
 
     assert _tree.get_max() == 17
 
 def testGetHieght():
-    _tree = __creat_tree()
+    _tree = __create_tree()
 
     assert _tree.get_height() == 4
 
@@ -45,13 +45,13 @@ def testRemoveRootOne():
     assert _tree.is_empty()
 
 def testRemoveRootMany():
-    _tree = __creat_tree()
+    _tree = __create_tree()
     _tree.remove(7)
 
     assert _tree.root.value == 8
 
 def testRemoveLeaves():
-    _tree = __creat_tree()
+    _tree = __create_tree()
     _tree.remove(1)
     _tree.remove(17)
 
@@ -59,17 +59,17 @@ def testRemoveLeaves():
     assert _tree.get_max() == 15
 
 def testIsBinarySearchTree():
-    _tree = __creat_tree()
+    _tree = __create_tree()
 
     assert _tree.is_binary_search_tree_in_order()
 
 def testIsNotBinarySearchTree():
-    _tree = __creat_tree()
+    _tree = __create_tree()
     _tree.root.value = 2
 
     assert not _tree.is_binary_search_tree_in_order()
 
-def __creat_tree():
+def __create_tree():
     _tree = BST()
     _tree.insert(7)
     _tree.insert(5)

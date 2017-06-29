@@ -67,10 +67,10 @@ class BST(object):
                 if value < current.value:
                     current = current.left
 
-                if value > current.value:
+                elif value > current.value:
                     current = current.right
 
-                if value == current.value:
+                else:
                     break
 
             # value found
@@ -100,7 +100,7 @@ class BST(object):
                         if current.parent.left == current:
                             current.parent.left = current.left
                         # is right
-                        if current.parent.right == current:
+                        elif current.parent.right == current:
                             current.parent.right = current.left
 
                     # it is the root
@@ -115,7 +115,7 @@ class BST(object):
                         if current.parent.left == current:
                             current.parent.left = current.right
                         # is right
-                        if current.parent.right == current:
+                        elif current.parent.right == current:
                             current.parent.right = current.right
 
                     # it is the root
@@ -127,6 +127,8 @@ class BST(object):
                 else:
                     _value = self.get_min(current.right)
                     current.value = _value
+                    # value was not removed, it was swapped
+                    self._size = self._size + 1
                     self.remove(_value, current.right)
 
 
@@ -194,8 +196,7 @@ class BST(object):
             else:
                 current = current.right
 
-        if current is None:
-            return False
+        return False
 
     def get_height(self, node=None):
         """ returns the height in nodes (single node's height is 1) """
@@ -248,7 +249,7 @@ class BST(object):
         if node is None:
             return None
 
-        current = self.root
+        current = node
         while current:
 
             if value < current.value:
@@ -268,10 +269,10 @@ class BST(object):
         if current.right:
             return self.get_min(current.right)
 
-        # return the first left ancestor
+        # return the first left ancestor (current is in the left ancestor's subtree)
         _parent = current.parent
-        while _parent and node == _parent.right:
-            node = _parent
+        while _parent and current == _parent.right:
+            current = _parent
             _parent = _parent.parent
 
         if _parent:
