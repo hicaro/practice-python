@@ -96,6 +96,7 @@ class Heap(object):
 
         _max = self._array[0]
         self._array[0] = self._array[self._size - 1]
+        self._array[self._size - 1] = _max
 
         self._size = self._size - 1
 
@@ -107,7 +108,7 @@ class Heap(object):
         assert index >= 0 and index < self._size
 
         aux = self._array[index]
-        self._array[index] = self._array[self._size]
+        self._array[index] = self._array[self._size - 1]
         self._array[self._size] = aux
 
         self._size = self._size - 1
